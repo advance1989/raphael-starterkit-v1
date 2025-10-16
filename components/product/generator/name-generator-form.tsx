@@ -113,7 +113,7 @@ export default function NameGeneratorForm({ onGenerate, isGenerating, hasTriedFr
   // Check if user has enough credits
   const creditCost = parseInt(form.watch('planType') || '1');
   const currentCredits = userCredits?.remaining_credits || 0;
-  const hasEnoughCredits = user ? currentCredits >= creditCost : true;
+  const hasEnoughCredits: boolean = user ? currentCredits >= creditCost : true;
 
   return (
     <motion.div
@@ -252,9 +252,9 @@ export default function NameGeneratorForm({ onGenerate, isGenerating, hasTriedFr
             </div>
 
             {/* Submit Button */}
-            <Button 
-              type="submit" 
-              disabled={isGenerating || (user && !hasEnoughCredits)}
+            <Button
+              type="submit"
+              disabled={isGenerating || (!!user && !hasEnoughCredits)}
               className="w-full h-14 text-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200"
             >
               {isGenerating ? (
